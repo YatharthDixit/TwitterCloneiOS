@@ -15,7 +15,7 @@ struct UserRowView: View {
             VStack(alignment: .leading){
                 Text("yatharthdixit")
                     .font(.subheadline)
-                    .bold()
+                    .bold() 
                     .foregroundColor(.black)
                 Text("Yatharth Dixit")
                     .font(.subheadline)
