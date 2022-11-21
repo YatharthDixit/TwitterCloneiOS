@@ -12,6 +12,7 @@ struct RegistrationView: View {
     @State private var username: String = ""
     @State private var email: String = ""
     @State private var password: String = ""
+    @EnvironmentObject var authViewModel: AuthViewModel
     @Environment(\.presentationMode) var presentationMode
     
     var body: some View {
@@ -19,10 +20,10 @@ struct RegistrationView: View {
             AuthHeaderView(title1: "Get Started,", title2: "Create your account")
             
             VStack(spacing: 40){
-                CustomInputField(imageName: "person", placeholderText: "Name", text: $name)
-                CustomInputField(imageName: "person", placeholderText: "Username", text: $username)
-                CustomInputField(imageName: "envelope", placeholderText: "Email", text: $email)
-                CustomInputField(imageName: "lock", placeholderText: "Password", text: $password)
+                CustomInputField(imageName: "person", placeholderText: "Name",isSecureField: false, text: $name)
+                CustomInputField(imageName: "person", placeholderText: "Username", isSecureField: false, text: $username)
+                CustomInputField(imageName: "envelope", placeholderText: "Email",isSecureField: false, text: $email)
+                CustomInputField(imageName: "lock", placeholderText: "Password",isSecureField: true, text: $password)
             }
             .padding(.horizontal, 32)
             .padding(.top, 44)
@@ -34,7 +35,7 @@ struct RegistrationView: View {
             }
             
             Button{
-                print("sign in here")
+                authViewModel.register(withEmail: email, password: password, fullName: name, username: username)
             } label: {
                 Text("Sign Up")
                     .frame(width: 340, height: 50)
