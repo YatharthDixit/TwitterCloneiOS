@@ -6,10 +6,15 @@
 //
 
 import SwiftUI
+import FirebaseStorage
 import Firebase
 
+
 class AuthViewModel: ObservableObject {
-    @Published var userSession : User?
+     private var tempUserSession: Firebase.User?
+    @Published var userSession : Firebase.User?
+    @Published var didUserAuthenticated  = false
+    
     init(){
         self.userSession = Auth.auth().currentUser
         print("DEBUG: user session is : \(self.userSession?.uid)")
@@ -38,8 +43,9 @@ class AuthViewModel: ObservableObject {
             }
             
             guard let user = result?.user else { return }
-            self.userSession = user
+           
             print("User is \(self.userSession)")
+            self.tempUserSession = user
             
             let data = ["email":email,
                         "username": username.lowercased(),
@@ -49,7 +55,7 @@ class AuthViewModel: ObservableObject {
             Firestore.firestore().collection("users")
                 .document(user.uid)
                 .setData(data) {_ in
-                    print("Did upload user data....")
+                    self.didUserAuthenticated = true
                 }
         }
         
@@ -59,5 +65,33 @@ class AuthViewModel: ObservableObject {
         userSession = nil
         //signout from backend
         try?Auth.auth().signOut()
+        
+    }
+    func uploadPhoto(selectedImage: UIImage){
+        guard let uid = tempUserSession?.uid else {return}
+        
+        guard selectedImage != nil else {return}
+        
+        let storageRef = Storage.storage().reference()
+        
+        let imageData = selectedImage.jpegData(compressionQuality: 0.8)
+        
+        guard imageData != nil else {return}
+        
+        let imagePath = "ProfilePhotos/\(UUID().uuidString).jpg"
+        
+        let fileRef = storageRef.child(imagePath)
+        
+        let uploadTask = fileRef.putData(imageData!, metadata: nil){metadata,
+            error in
+            if error == nil && imageData != nil{
+                Firestore.firestore().collection("users")
+                    .document(uid)
+                    .updateData([
+                        "profileImageUrl" : imagePath
+                    ])
+                self.userSession = self.tempUserSession
+            }
+        }
     }
 }

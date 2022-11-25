@@ -37,9 +37,15 @@
 		62624658292BD323001FBF49 /* CustomInputField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62624657292BD323001FBF49 /* CustomInputField.swift */; };
 		6262465A292BD804001FBF49 /* AuthHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62624659292BD804001FBF49 /* AuthHeaderView.swift */; };
 		6262465C292BEDEF001FBF49 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6262465B292BEDEE001FBF49 /* GoogleService-Info.plist */; };
+		6297F278292EA3B200D360C9 /* ImageUploader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6297F277292EA3B200D360C9 /* ImageUploader.swift */; };
+		6297F27A292EB95200D360C9 /* ImageUpload.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6297F279292EB95200D360C9 /* ImageUpload.swift */; };
+		6297F27C292EC8B000D360C9 /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6297F27B292EC8B000D360C9 /* UserService.swift */; };
+		6297F27E292ECB7D00D360C9 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6297F27D292ECB7D00D360C9 /* User.swift */; };
 		62C5F9A2292B825100FCBB11 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62C5F9A1292B825100FCBB11 /* LoginView.swift */; };
 		62C5F9A4292B826B00FCBB11 /* RegistrationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62C5F9A3292B826B00FCBB11 /* RegistrationView.swift */; };
 		62C5F9A6292B841000FCBB11 /* RoundedShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62C5F9A5292B841000FCBB11 /* RoundedShape.swift */; };
+		62E1D955292D2B4500DF0274 /* ProfilePhotoSelectorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E1D954292D2B4500DF0274 /* ProfilePhotoSelectorView.swift */; };
+		62E1D958292D3F3E00DF0274 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E1D957292D3F3E00DF0274 /* ImagePicker.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -68,9 +74,15 @@
 		62624657292BD323001FBF49 /* CustomInputField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomInputField.swift; sourceTree = "<group>"; };
 		62624659292BD804001FBF49 /* AuthHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthHeaderView.swift; sourceTree = "<group>"; };
 		6262465B292BEDEE001FBF49 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "GoogleService-Info.plist"; sourceTree = SOURCE_ROOT; };
+		6297F277292EA3B200D360C9 /* ImageUploader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageUploader.swift; sourceTree = "<group>"; };
+		6297F279292EB95200D360C9 /* ImageUpload.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageUpload.swift; sourceTree = "<group>"; };
+		6297F27B292EC8B000D360C9 /* UserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
+		6297F27D292ECB7D00D360C9 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		62C5F9A1292B825100FCBB11 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		62C5F9A3292B826B00FCBB11 /* RegistrationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationView.swift; sourceTree = "<group>"; };
 		62C5F9A5292B841000FCBB11 /* RoundedShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedShape.swift; sourceTree = "<group>"; };
+		62E1D954292D2B4500DF0274 /* ProfilePhotoSelectorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilePhotoSelectorView.swift; sourceTree = "<group>"; };
+		62E1D957292D3F3E00DF0274 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -184,6 +196,7 @@
 		623E7583292A87DA00395152 /* Twitter Clone */ = {
 			isa = PBXGroup;
 			children = (
+				62E1D956292D3F1B00DF0274 /* Utils */,
 				623E7592292A87F400395152 /* Extension */,
 				623E7597292A880A00395152 /* Model */,
 				623E7596292A880900395152 /* Service */,
@@ -232,6 +245,9 @@
 		623E7596292A880900395152 /* Service */ = {
 			isa = PBXGroup;
 			children = (
+				6297F277292EA3B200D360C9 /* ImageUploader.swift */,
+				6297F279292EB95200D360C9 /* ImageUpload.swift */,
+				6297F27B292EC8B000D360C9 /* UserService.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -239,6 +255,7 @@
 		623E7597292A880A00395152 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				6297F27D292ECB7D00D360C9 /* User.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -360,6 +377,7 @@
 			children = (
 				62C5F9A1292B825100FCBB11 /* LoginView.swift */,
 				62C5F9A3292B826B00FCBB11 /* RegistrationView.swift */,
+				62E1D954292D2B4500DF0274 /* ProfilePhotoSelectorView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -370,6 +388,14 @@
 				62499AAD292BF67B00436593 /* AuthViewModel.swift */,
 			);
 			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		62E1D956292D3F1B00DF0274 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				62E1D957292D3F3E00DF0274 /* ImagePicker.swift */,
+			);
+			path = Utils;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -458,16 +484,21 @@
 				623E75B3292AA2E000395152 /* ProfileView.swift in Sources */,
 				623E7587292A87DA00395152 /* ContentView.swift in Sources */,
 				6215430A292AC84500CB5667 /* SideMenuRowView.swift in Sources */,
+				6297F27A292EB95200D360C9 /* ImageUpload.swift in Sources */,
 				623E75A2292A8F5800395152 /* TweetRowView.swift in Sources */,
 				623E75B5292AAD0C00395152 /* TweetFilterViewModel.swift in Sources */,
 				62624658292BD323001FBF49 /* CustomInputField.swift in Sources */,
+				6297F27E292ECB7D00D360C9 /* User.swift in Sources */,
 				623E75AD292AA0DD00395152 /* NotificationView.swift in Sources */,
 				622529A3292B5CAA0048CAD4 /* TextArea.swift in Sources */,
 				62154308292AC83200CB5667 /* SideMenuView.swift in Sources */,
 				623E759F292A894B00395152 /* FeedView.swift in Sources */,
 				622529A1292B5B2C0048CAD4 /* NewTweetView.swift in Sources */,
 				623E7585292A87DA00395152 /* Twitter_CloneApp.swift in Sources */,
+				62E1D958292D3F3E00DF0274 /* ImagePicker.swift in Sources */,
 				6215430C292AC85E00CB5667 /* SideMenuViewModel.swift in Sources */,
+				6297F27C292EC8B000D360C9 /* UserService.swift in Sources */,
+				62E1D955292D2B4500DF0274 /* ProfilePhotoSelectorView.swift in Sources */,
 				62154303292AC47300CB5667 /* UserRowView.swift in Sources */,
 				62C5F9A6292B841000FCBB11 /* RoundedShape.swift in Sources */,
 				62154310292AD2FD00CB5667 /* SideMenuOptionRowView.swift in Sources */,
@@ -475,6 +506,7 @@
 				62C5F9A2292B825100FCBB11 /* LoginView.swift in Sources */,
 				623E75A5292A98B800395152 /* MainTabView.swift in Sources */,
 				62499AAE292BF67B00436593 /* AuthViewModel.swift in Sources */,
+				6297F278292EA3B200D360C9 /* ImageUploader.swift in Sources */,
 				6262465A292BD804001FBF49 /* AuthHeaderView.swift in Sources */,
 				6215430E292ACA3500CB5667 /* UserStatsView.swift in Sources */,
 				62C5F9A4292B826B00FCBB11 /* RegistrationView.swift in Sources */,
