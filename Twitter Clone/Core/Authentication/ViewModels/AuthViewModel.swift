@@ -14,10 +14,13 @@ class AuthViewModel: ObservableObject {
      private var tempUserSession: Firebase.User?
     @Published var userSession : Firebase.User?
     @Published var didUserAuthenticated  = false
+    @Published var currentUser : User?
+    private let service = UserService()
     
     init(){
         self.userSession = Auth.auth().currentUser
         print("DEBUG: user session is : \(self.userSession?.uid)")
+        self.fetchUser()
     }
     func login(withEmail email: String, password : String){
         print("DEBUG LOGIN with EMAIL : \(email)")
@@ -29,6 +32,7 @@ class AuthViewModel: ObservableObject {
             guard let user = result?.user else { return }
             self.userSession = user
             print("Logged in user")
+            self.fetchUser()
         }
         
     }
@@ -50,7 +54,7 @@ class AuthViewModel: ObservableObject {
             let data = ["email":email,
                         "username": username.lowercased(),
                         "fullname":fullName,
-                        "uid": user.uid]
+                        ]
             
             Firestore.firestore().collection("users")
                 .document(user.uid)
@@ -58,6 +62,7 @@ class AuthViewModel: ObservableObject {
                     self.didUserAuthenticated = true
                 }
         }
+        
         
     }
     func signOut(){
@@ -67,31 +72,55 @@ class AuthViewModel: ObservableObject {
         try?Auth.auth().signOut()
         
     }
-    func uploadPhoto(selectedImage: UIImage){
+//    func uploadPhoto(selectedImage: UIImage){
+//        guard let uid = tempUserSession?.uid else {return}
+//
+//        guard selectedImage != nil else {return}
+//
+//        let storageRef = Storage.storage().reference()
+//
+//        let imageData = selectedImage.jpegData(compressionQuality: 0.8)
+//
+//        guard imageData != nil else {return}
+//
+//        let imagePath = "ProfilePhotos/\(UUID().uuidString).jpg"
+//
+//        let fileRef = storageRef.child(imagePath)
+//
+//        let uploadTask = fileRef.putData(imageData!, metadata: nil){metadata,
+//            error in
+//            if error == nil && imageData != nil{
+//                Firestore.firestore().collection("users")
+//                    .document(uid)
+//                    .updateData([
+//                        "profileImageUrl" : imagePath
+//                    ])
+//                self.userSession = self.tempUserSession
+//            }
+//        }
+//    }
+    
+    func uploadPhoto(_ image: UIImage){
         guard let uid = tempUserSession?.uid else {return}
         
-        guard selectedImage != nil else {return}
+        ImageUploader.uploadImage(image: image) { profileImageUrl in
+            Firestore.firestore().collection("users")
+                .document(uid)
+                .updateData(["profileImageUrl": profileImageUrl]) { _ in
+                    self.userSession = self.tempUserSession
+                    self.fetchUser()
+                }
+        }
         
-        let storageRef = Storage.storage().reference()
+                
+    }
+    func fetchUser(){
+        guard let uid = self.userSession?.uid else {return}
         
-        let imageData = selectedImage.jpegData(compressionQuality: 0.8)
         
-        guard imageData != nil else {return}
-        
-        let imagePath = "ProfilePhotos/\(UUID().uuidString).jpg"
-        
-        let fileRef = storageRef.child(imagePath)
-        
-        let uploadTask = fileRef.putData(imageData!, metadata: nil){metadata,
-            error in
-            if error == nil && imageData != nil{
-                Firestore.firestore().collection("users")
-                    .document(uid)
-                    .updateData([
-                        "profileImageUrl" : imagePath
-                    ])
-                self.userSession = self.tempUserSession
-            }
+        service.fetchUser(withUid: uid){ user in
+            self.currentUser = user
+            
         }
     }
 }

@@ -45,9 +45,9 @@ struct ProfilePhotoSelectorView: View {
                 }
                 .padding(.top, 50)
             Spacer()
-            if  profileImage != nil {
+            if  let selectedImage = selectedImage {
                 Button{
-                    authViewModel.uploadPhoto(selectedImage : selectedImage!)
+                    authViewModel.uploadPhoto(selectedImage)
                     
                 } label: {
                     Text("Continue")

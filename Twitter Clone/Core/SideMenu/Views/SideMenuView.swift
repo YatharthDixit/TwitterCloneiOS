@@ -6,39 +6,62 @@
 //
 
 import SwiftUI
+import Kingfisher
+
 
 struct SideMenuView: View {
     @EnvironmentObject var authViewModel: AuthViewModel
     
     var body: some View {
-        VStack(alignment: .leading, spacing : 32) {
-            sideMenuProfileData
-            
-            
-            ForEach (SideMenuViewModel.allCases, id: \.rawValue) { viewModel in
-                if viewModel == .profile {
-                    NavigationLink{
-                        ProfileView()
-                    }label: {
+        if let user = authViewModel.currentUser {
+            VStack(alignment: .leading, spacing : 32) {
+                    VStack(alignment: .leading){
+                        KFImage(URL(string: user.profileImageUrl))
+                            .resizable()
+                            .clipShape(Circle())
+                            .scaledToFit()
+                            .frame(width: 48, height: 48)
+                        
+                        VStack(alignment: .leading){
+                            Text(user.fullname)
+                                .font(.headline)
+                            Text("@\(user.username)")
+                                .font(.caption)
+                                .foregroundColor(.gray)
+                            
+                        }
+                        
+                        UserStatsView()
+                            .padding(.vertical)
+                    }
+                    .padding(.leading)
+                
+                
+                ForEach (SideMenuViewModel.allCases, id: \.rawValue) { viewModel in
+                    if viewModel == .profile {
+                        NavigationLink{
+                            ProfileView(user: user)
+                        }label: {
+                            SideMenuOptionRowView(viewModel: viewModel)
+                            
+                        }
+                    }
+                    else if viewModel == .logout{
+                        Button{
+                            authViewModel.signOut()
+                            
+                        }label:{
+                            SideMenuOptionRowView (viewModel: viewModel)
+                        }
+                    }
+                    else{
                         SideMenuOptionRowView(viewModel: viewModel)
                         
                     }
                 }
-                else if viewModel == .logout{
-                    Button{
-                        authViewModel.signOut()
-                        
-                    }label:{
-                        SideMenuOptionRowView (viewModel: viewModel)
-                    }
-                }
-                else{
-                    SideMenuOptionRowView(viewModel: viewModel)
-                    
-                }
+                
+                Spacer()
             }
-            
-            Spacer()
         }
         
         
@@ -52,25 +75,8 @@ struct SideMenuView: View {
             SideMenuView()
         }
     }
-    extension SideMenuView{
-        var sideMenuProfileData : some View{
-            
-            VStack(alignment: .leading){
-                Circle()
-                    .frame(width: 48 , height: 48 )
-                VStack(alignment: .leading){
-                    Text("Yatharth Dixit")
-                        .font(.headline)
-                    Text("@yatharthdixit")
-                        .font(.caption)
-                        .foregroundColor(.gray)
-                    
-                }
-                
-                UserStatsView()
-                    .padding(.vertical)
-            }
-            .padding(.leading)
-        }
-    }
+//    extension SideMenuView{
+//        var sideMenuProfileData : some View{
+//        }
+//    }
 
