@@ -69,8 +69,7 @@ extension ContentView{
                                 KFImage(URL(string: user.profileImageUrl))
                                     .resizable()
                                     .clipShape(Circle())
-                                    .scaledToFit()
-                                    .frame(width: 48, height: 48)
+                                    .frame(width: 30, height: 30)
                             }
                             
                         }

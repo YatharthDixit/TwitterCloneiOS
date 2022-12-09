@@ -16,8 +16,11 @@ struct UserRowView: View {
         HStack(spacing : 12){
             KFImage(URL(string: user.profileImageUrl))
                 .resizable()
-                .clipShape(Circle())
+                .scaledToFit()
                 .frame(width: 48, height: 48)
+                .clipShape(Circle())
+                
+                
             VStack(alignment: .leading){
                 Text(user.username)
                     .font(.subheadline)

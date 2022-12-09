@@ -12,6 +12,8 @@ struct ProfileView: View {
     @State private var selectedFilter : TweetFilterViewModel = .tweets
     @Namespace var animation
     @Environment(\.presentationMode) var mode
+    @EnvironmentObject var authViewModel: AuthViewModel
+    @EnvironmentObject var feedViewModel: FeedViewModel
     private let user : User
     
     init(user: User){
@@ -65,8 +67,9 @@ extension ProfileView{
                 }
                 KFImage(URL(string: user.profileImageUrl))
                     .resizable()
-                    .clipShape(Circle())
+                    .scaledToFit()
                     .frame(width: 72, height: 72)
+                    .clipShape(Circle())
                     .offset(x:16, y:24)
                 
                 
@@ -83,17 +86,31 @@ extension ProfileView{
                 .font(.title3)
                 .padding(6)
                 .overlay(Circle().stroke(Color.gray, lineWidth: 0.75))
-             
-            Button{
-            }label: {
-                
-                Text("Edit Profile")
-                    .font(.subheadline)
-                    .bold()
-                    .frame(width: 120, height: 32)
-                    .overlay(RoundedRectangle(cornerRadius: 20).stroke(Color.gray, lineWidth: 0.75))
-                    .foregroundColor(.black)
+            if(authViewModel.currentUser?.id == user.id){
+                Button{
+                }label: {
                     
+                    Text("Edit Profile")
+                        .font(.subheadline)
+                        .bold()
+                        .frame(width: 120, height: 32)
+                        .overlay(RoundedRectangle(cornerRadius: 20).stroke(Color.gray, lineWidth: 0.75))
+                        .foregroundColor(.black)
+                        
+                }
+            }
+            else{
+                Button{
+                }label: {
+                    
+                    Text("Follow")
+                        .font(.subheadline)
+                        .bold()
+                        .frame(width: 120, height: 32)
+                        .overlay(RoundedRectangle(cornerRadius: 20).stroke(Color.gray, lineWidth: 0.75))
+                        .foregroundColor(.black)
+                    
+                }
             }
             
         } .padding(.trailing)
@@ -170,8 +187,8 @@ extension ProfileView{
         ScrollView {
             LazyVStack{
                 ForEach(0 ... 9, id: \.self){ _ in
-                    TweetRowView()
-                        .padding()
+//                    TweetRowView(tweet: tweet)
+//                        .padding()
                 }
             }
         }

@@ -6,22 +6,33 @@
 //
 
 import SwiftUI
+import Kingfisher
 
 struct TweetRowView: View {
+    let tweet : Tweet
+    
     var body: some View {
         VStack(alignment: .leading){
+            if let user = tweet.user{
+            
             //MARK: - Profile image, User Info & Tweet
+            
             HStack(alignment: .top,spacing: 12){
-                Circle()
+                
+                KFImage(URL(string: user.profileImageUrl))
+                    .resizable()
+                    .clipShape(Circle())
                     .frame(width: 56, height: 56)
-                    .foregroundColor(Color(.systemBlue))
+                    .scaledToFit()
+                
                 // MARK: - User Info and Tweet captions
                 VStack(alignment: .leading, spacing: 4){
                     // MARK: - User Info
+                    
                     HStack{
-                        Text("Yatharth Dixit")
+                        Text(user.fullname)
                             .font(.subheadline).bold()
-                        Text("@yatharthdixit")
+                        Text(user.username)
                             .foregroundColor(.gray)
                             .font(.caption)
                         Text("2w")
@@ -29,12 +40,14 @@ struct TweetRowView: View {
                             .font(.caption)
                         
                     }
+                    
+                    
                     //MARK: - Tweets
-                    Text("Learn to Code.")
+                    Text(tweet.caption)
                         .font(.subheadline)
                         .multilineTextAlignment(.leading)
                 }
- 
+                
             }
             //MARK: - Action Buttons;
             HStack{
@@ -42,7 +55,7 @@ struct TweetRowView: View {
                     //action here;
                 } label: {
                     Image(systemName: "bubble.left")
-                        
+                    
                 }
                 Spacer()
                 Button{
@@ -68,7 +81,7 @@ struct TweetRowView: View {
             .padding()
             .foregroundColor(.gray)
             Divider()
-            
+        }
         }
         
         .padding()
@@ -77,8 +90,8 @@ struct TweetRowView: View {
     }
 }
 
-struct TweetRowView_Previews: PreviewProvider {
-    static var previews: some View {
-        TweetRowView()
-    }
-}
+//struct TweetRowView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        TweetRowView()
+//    }
+//}
